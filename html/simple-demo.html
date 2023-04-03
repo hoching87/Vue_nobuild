@@ -1,0 +1,25 @@
+<body>
+  <div id="app">
+    <button @click="increment">{{state}}</button>
+
+    <br /><a href="../index.html">Back to Index</a>
+  </div>
+</body>
+
+<script type="module">
+  import {createApp, ref} from "../vue.esm-browser.js";
+
+  const app = createApp({
+    setup() {
+      const state = ref(123);
+
+      function increment() {
+        state.value += 1;
+      }
+
+      return {state, increment};
+    }
+  });
+
+  app.mount("#app");
+</script>
