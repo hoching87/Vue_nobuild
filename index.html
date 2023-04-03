@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div v-for="x in 9" class="container">
+        <div v-for="y in 9">
+          <Button-Counter :title="`${x} ${y}`" @self-count="state = {'x':x,'y':y}"></Button-Counter>
+        </div>
+      </div>
+      <span>Currently on : {{String.prototype.concat(state.x + ' ',state.y) }}</span>
+    </div>
+  </body>
+
+  <template id="template-button">
+    <button @click="$emit('self-count')">{{title}}</button>
+  </template>
+
+  <script type="module">
+    import {createApp, ref} from "./vue.esm-browser.js";
+    import ButtonCounter from "./components/bit.js";
+
+    const app = createApp({
+      components: {
+        ButtonCounter
+      },
+      setup() {
+        const state = ref({x: 0, y: 0});
+
+        return {state};
+      }
+    });
+
+    app.mount("#app");
+  </script>
+</html>
